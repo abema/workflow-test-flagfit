@@ -1,7 +1,6 @@
 name: Create Issues from SARIF
 
-on:
-  workflow_dispatch:
+on: push
 #  schedule:
 #    - cron: '0 0 * * 1' # Runs every Monday
 
