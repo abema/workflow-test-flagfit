@@ -16,7 +16,7 @@ interface SampleFlagService {
     defaultValue = false
   )
   @FlagType.WorkInProgress(
-    owner = "Hoge Fuga",
+    owner = "momomomo111",
     description = "hogehoge",
     expiryDate = "2022-12-30"
   )
@@ -48,9 +48,9 @@ interface SampleFlagService {
     defaultValue = false
   )
   @FlagType.Permission(
-    owner = "Hoge Fuga",
+    owner = "momomomo111",
     description = "hogehoge",
-    expiryDate = "2022-12-30"
+    expiryDate = "2023-06-20"
   )
   fun awesomePermissionFeatureEnabled(): Boolean
 
