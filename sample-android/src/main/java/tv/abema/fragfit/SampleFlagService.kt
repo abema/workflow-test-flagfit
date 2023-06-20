@@ -39,15 +39,15 @@ interface SampleFlagService {
   )
   fun awesomeOpsFeatureEnabled(): Boolean
 
-  @BooleanFlag(
-    key = "new-awesome-permission-feature",
-    defaultValue = false
-  )
-  @FlagType.Permission(
-    owner = "Hoge Fuga",
-    expiryDate = "2022-12-30"
-  )
-  fun awesomePermissionFeatureEnabled(): Boolean
+//  @BooleanFlag(
+//    key = "new-awesome-permission-feature",
+//    defaultValue = false
+//  )
+//  @FlagType.Permission(
+//    owner = "Hoge Fuga",
+//    expiryDate = "2022-12-30"
+//  )
+//  fun awesomePermissionFeatureEnabled(): Boolean
 
   @BooleanFlag(
     key = "new-awesome-unknown-feature",
