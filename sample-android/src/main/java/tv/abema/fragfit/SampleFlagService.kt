@@ -15,7 +15,7 @@ interface SampleFlagService {
     defaultValue = false
   )
   @FlagType.WorkInProgress(
-    owner = "Hoge Fuga",
+    owner = "momomomo111",
     expiryDate = "2022-12-30"
   )
   fun awesomeWipFeatureEnabled(): Boolean
