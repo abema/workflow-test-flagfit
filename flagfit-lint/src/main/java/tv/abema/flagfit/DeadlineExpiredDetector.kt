@@ -1,4 +1,4 @@
-package tv.abema.lint
+package tv.abema.flagfit
 
 import com.android.tools.lint.detector.api.AnnotationInfo
 import com.android.tools.lint.detector.api.AnnotationUsageInfo
@@ -85,7 +85,7 @@ class DeadlineExpiredDetector : Detector(), SourceCodeScanner {
         context.report(ISSUE_DEADLINE_EXPIRED, element, location, message)
       } else {
         val message = "The @FlagType.$name `owner: $owner` will expire soon!\n" +
-          "Please consider deleting @FlagType.$name as the expiry date of $expiryDate is scheduled to pass within a week." +
+          "Please consider deleting @FlagType.$name as the expiry date of $expiryDate is scheduled to pass within a week.\n" +
           "The flag of `key: ${key}` is used in the $methodName function.\n"
 
         context.report(ISSUE_DEADLINE_SOON, element, location, message)
