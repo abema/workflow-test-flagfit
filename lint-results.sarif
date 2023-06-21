@@ -1,0 +1,833 @@
+{
+    "$schema" : "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+    "version" : "2.1.0",
+    "runs" : [
+        {
+            "tool": {
+                "driver": {
+                    "name": "Android Lint",
+                    "fullName": "Android Lint (in gradle)",
+                    "version": "7.4.2",
+                    "semanticVersion": "7.4.2",
+                    "organization": "Google",
+                    "informationUri": "https://developer.android.com/studio/write/lint",
+                    "fullDescription": {
+                        "text": "Static analysis originally for Android source code but now performing general analysis"
+                    },
+                    "language": "en-US",
+                    "rules": [
+                        {
+                            "id": "FlagfitDeadlineExpired",
+                            "shortDescription": {
+                                "text": "FlagType annotation's date is in the past!"
+                            },
+                            "fullDescription": {
+                                "text": "The date provided in @FlagType annotation has already passed..."
+                            },
+                            "defaultConfiguration": {
+                                "level": "warning",
+                                "rank": 50
+                            },
+                            "properties": {
+                                "tags": [
+                                    "Productivity"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "GradleDependency",
+                            "shortDescription": {
+                                "text": "Obsolete Gradle Dependency"
+                            },
+                            "fullDescription": {
+                                "text": "This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+                            },
+                            "defaultConfiguration": {
+                                "level": "warning",
+                                "rank": 70
+                            },
+                            "properties": {
+                                "tags": [
+                                    "Correctness"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "ObsoleteSdkInt",
+                            "shortDescription": {
+                                "text": "Obsolete SDK_INT Version Check"
+                            },
+                            "fullDescription": {
+                                "text": "This check flags version checks that are not necessary, because the minSdkVersion (or surrounding known API level) is already at least as high as the version checked for.\n\nSimilarly, it also looks for resources in -vNN folders, such as values-v14 where the version qualifier is less than or equal to the minSdkVersion, where the contents should be merged into the best folder.",
+                                "markdown": "This check flags version checks that are not necessary, because the `minSdkVersion` (or surrounding known API level) is already at least as high as the version checked for.\n\nSimilarly, it also looks for resources in `-vNN` folders, such as `values-v14` where the version qualifier is less than or equal to the `minSdkVersion`, where the contents should be merged into the best folder."
+                            },
+                            "defaultConfiguration": {
+                                "level": "warning",
+                                "rank": 50
+                            },
+                            "properties": {
+                                "tags": [
+                                    "Performance"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "UnusedResources",
+                            "shortDescription": {
+                                "text": "Unused resources"
+                            },
+                            "fullDescription": {
+                                "text": "Unused resources make applications larger and slow down builds.\n\n\nThe unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.\n\nYou can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.\n,"
+                            },
+                            "defaultConfiguration": {
+                                "level": "warning",
+                                "rank": 80
+                            },
+                            "properties": {
+                                "tags": [
+                                    "Performance"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            "originalUriBaseIds": {
+                "%SRCROOT%": {
+                    "uri": "file:///Users/s18562/Documents/workflow-test-flagfit/"
+                }
+            },
+            "results": [
+                {
+                    "ruleId": "GradleDependency",
+                    "ruleIndex": 1,
+                    "message": {
+                        "text": "A newer version of androidx.core:core-ktx than 1.8.0 is available: 1.10.1"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/build.gradle"
+                                },
+                                "region": {
+                                    "startLine": 58,
+                                    "startColumn": 18,
+                                    "endLine": 58,
+                                    "endColumn": 48,
+                                    "charOffset": 1206,
+                                    "charLength": 30,
+                                    "snippet": {
+                                        "text": "'androidx.core:core-ktx:1.8.0'"
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 56,
+                                    "endLine": 61,
+                                    "snippet": {
+                                        "text": "dependencies {\n\n  implementation 'androidx.core:core-ktx:1.8.0'\n  implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "fixes": [
+                        {
+                            "description": {
+                                "text": "Change to 1.10.1"
+                            },
+                            "artifactChanges": [
+                                {
+                                    "artifactLocation": {
+                                        "uriBaseId": "%SRCROOT%",
+                                        "uri": "sample-android/build.gradle"
+                                    },
+                                    "replacements": [
+                                        {
+                                            "deletedRegion": {
+                                                "startLine": 58,
+                                                "startColumn": 42,
+                                                "charOffset": 1230,
+                                                "endLine": 58,
+                                                "endColumn": 47,
+                                                "charLength": 5
+                                            },
+                                            "insertedContent": {
+                                                "text": "1.10.1\n"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "1774cb7773056590"
+                    }
+                },
+                {
+                    "ruleId": "GradleDependency",
+                    "ruleIndex": 1,
+                    "message": {
+                        "text": "A newer version of androidx.lifecycle:lifecycle-runtime-ktx than 2.3.1 is available: 2.6.1"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/build.gradle"
+                                },
+                                "region": {
+                                    "startLine": 59,
+                                    "startColumn": 18,
+                                    "endLine": 59,
+                                    "endColumn": 66,
+                                    "charOffset": 1254,
+                                    "charLength": 48,
+                                    "snippet": {
+                                        "text": "'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'"
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 57,
+                                    "endLine": 62,
+                                    "snippet": {
+                                        "text": "\n  implementation 'androidx.core:core-ktx:1.8.0'\n  implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'\n  implementation 'androidx.activity:activity-compose:1.5.1'"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "fixes": [
+                        {
+                            "description": {
+                                "text": "Change to 2.6.1"
+                            },
+                            "artifactChanges": [
+                                {
+                                    "artifactLocation": {
+                                        "uriBaseId": "%SRCROOT%",
+                                        "uri": "sample-android/build.gradle"
+                                    },
+                                    "replacements": [
+                                        {
+                                            "deletedRegion": {
+                                                "startLine": 59,
+                                                "startColumn": 60,
+                                                "charOffset": 1296,
+                                                "endLine": 59,
+                                                "endColumn": 65,
+                                                "charLength": 5
+                                            },
+                                            "insertedContent": {
+                                                "text": "2.6.1\n"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "3e56ceb2057221e9"
+                    }
+                },
+                {
+                    "ruleId": "GradleDependency",
+                    "ruleIndex": 1,
+                    "message": {
+                        "text": "A newer version of androidx.activity:activity-compose than 1.5.1 is available: 1.7.2"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/build.gradle"
+                                },
+                                "region": {
+                                    "startLine": 60,
+                                    "startColumn": 18,
+                                    "endLine": 60,
+                                    "endColumn": 60,
+                                    "charOffset": 1320,
+                                    "charLength": 42,
+                                    "snippet": {
+                                        "text": "'androidx.activity:activity-compose:1.5.1'"
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 58,
+                                    "endLine": 63,
+                                    "snippet": {
+                                        "text": "  implementation 'androidx.core:core-ktx:1.8.0'\n  implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'\n  implementation 'androidx.activity:activity-compose:1.5.1'\n  implementation platform('androidx.compose:compose-bom:2022.10.00')"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "fixes": [
+                        {
+                            "description": {
+                                "text": "Change to 1.7.2"
+                            },
+                            "artifactChanges": [
+                                {
+                                    "artifactLocation": {
+                                        "uriBaseId": "%SRCROOT%",
+                                        "uri": "sample-android/build.gradle"
+                                    },
+                                    "replacements": [
+                                        {
+                                            "deletedRegion": {
+                                                "startLine": 60,
+                                                "startColumn": 54,
+                                                "charOffset": 1356,
+                                                "endLine": 60,
+                                                "endColumn": 59,
+                                                "charLength": 5
+                                            },
+                                            "insertedContent": {
+                                                "text": "1.7.2\n"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "9ca7cc99f7fb8acc"
+                    }
+                },
+                {
+                    "ruleId": "GradleDependency",
+                    "ruleIndex": 1,
+                    "message": {
+                        "text": "A newer version of androidx.compose:compose-bom than 2022.10.00 is available: 2023.06.00"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/build.gradle"
+                                },
+                                "region": {
+                                    "startLine": 61,
+                                    "startColumn": 27,
+                                    "endLine": 61,
+                                    "endColumn": 68,
+                                    "charOffset": 1389,
+                                    "charLength": 41,
+                                    "snippet": {
+                                        "text": "'androidx.compose:compose-bom:2022.10.00'"
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 59,
+                                    "endLine": 64,
+                                    "snippet": {
+                                        "text": "  implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'\n  implementation 'androidx.activity:activity-compose:1.5.1'\n  implementation platform('androidx.compose:compose-bom:2022.10.00')\n  implementation 'androidx.compose.ui:ui'"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "fixes": [
+                        {
+                            "description": {
+                                "text": "Change to 2023.06.00"
+                            },
+                            "artifactChanges": [
+                                {
+                                    "artifactLocation": {
+                                        "uriBaseId": "%SRCROOT%",
+                                        "uri": "sample-android/build.gradle"
+                                    },
+                                    "replacements": [
+                                        {
+                                            "deletedRegion": {
+                                                "startLine": 61,
+                                                "startColumn": 57,
+                                                "charOffset": 1419,
+                                                "endLine": 61,
+                                                "endColumn": 67,
+                                                "charLength": 10
+                                            },
+                                            "insertedContent": {
+                                                "text": "2023.06.00\n"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "f80b49e3d9b6b734"
+                    }
+                },
+                {
+                    "ruleId": "GradleDependency",
+                    "ruleIndex": 1,
+                    "message": {
+                        "text": "A newer version of androidx.compose:compose-bom than 2022.10.00 is available: 2023.06.00"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/build.gradle"
+                                },
+                                "region": {
+                                    "startLine": 75,
+                                    "startColumn": 38,
+                                    "endLine": 75,
+                                    "endColumn": 79,
+                                    "charOffset": 2025,
+                                    "charLength": 41,
+                                    "snippet": {
+                                        "text": "'androidx.compose:compose-bom:2022.10.00'"
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 73,
+                                    "endLine": 78,
+                                    "snippet": {
+                                        "text": "  androidTestImplementation 'androidx.test.ext:junit:1.1.5'\n  androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'\n  androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')\n  androidTestImplementation 'androidx.compose.ui:ui-test-junit4'"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "fixes": [
+                        {
+                            "description": {
+                                "text": "Change to 2023.06.00"
+                            },
+                            "artifactChanges": [
+                                {
+                                    "artifactLocation": {
+                                        "uriBaseId": "%SRCROOT%",
+                                        "uri": "sample-android/build.gradle"
+                                    },
+                                    "replacements": [
+                                        {
+                                            "deletedRegion": {
+                                                "startLine": 75,
+                                                "startColumn": 68,
+                                                "charOffset": 2055,
+                                                "endLine": 75,
+                                                "endColumn": 78,
+                                                "charLength": 10
+                                            },
+                                            "insertedContent": {
+                                                "text": "2023.06.00\n"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "bb6087585cf4c58e"
+                    }
+                },
+                {
+                    "ruleId": "ObsoleteSdkInt",
+                    "ruleIndex": 2,
+                    "message": {
+                        "text": "This folder configuration (v24) is unnecessary; minSdkVersion is 24. Merge all the resources in this folder into drawable.",
+                        "markdown": "This folder configuration (`v24`) is unnecessary; `minSdkVersion` is 24. Merge all the resources in this folder into `drawable`."
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/src/main/res/drawable-v24"
+                                },
+                                "region": {
+                                    "startLine": 1
+                                }                            }
+                        }
+                    ],
+                    "fixes": [
+                    ],
+                    "partialFingerprints": {
+                    }
+                },
+                {
+                    "ruleId": "UnusedResources",
+                    "ruleIndex": 3,
+                    "message": {
+                        "text": "The resource R.color.purple_200 appears to be unused",
+                        "markdown": "The resource `R.color.purple_200` appears to be unused"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/src/main/res/values/colors.xml"
+                                },
+                                "region": {
+                                    "startLine": 3,
+                                    "startColumn": 10,
+                                    "endLine": 3,
+                                    "endColumn": 27,
+                                    "charOffset": 60,
+                                    "charLength": 17,
+                                    "snippet": {
+                                        "text": "name=\"purple_200\""
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 1,
+                                    "endLine": 6,
+                                    "snippet": {
+                                        "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resources>\n  <color name=\"purple_200\">#FFBB86FC</color>\n  <color name=\"purple_500\">#FF6200EE</color>"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "fixes": [
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "cf836a2c131fa326"
+                    }
+                },
+                {
+                    "ruleId": "UnusedResources",
+                    "ruleIndex": 3,
+                    "message": {
+                        "text": "The resource R.color.purple_500 appears to be unused",
+                        "markdown": "The resource `R.color.purple_500` appears to be unused"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/src/main/res/values/colors.xml"
+                                },
+                                "region": {
+                                    "startLine": 4,
+                                    "startColumn": 10,
+                                    "endLine": 4,
+                                    "endColumn": 27,
+                                    "charOffset": 105,
+                                    "charLength": 17,
+                                    "snippet": {
+                                        "text": "name=\"purple_500\""
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 2,
+                                    "endLine": 7,
+                                    "snippet": {
+                                        "text": "<resources>\n  <color name=\"purple_200\">#FFBB86FC</color>\n  <color name=\"purple_500\">#FF6200EE</color>\n  <color name=\"purple_700\">#FF3700B3</color>"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "fixes": [
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "39728a6f06beeca1"
+                    }
+                },
+                {
+                    "ruleId": "UnusedResources",
+                    "ruleIndex": 3,
+                    "message": {
+                        "text": "The resource R.color.purple_700 appears to be unused",
+                        "markdown": "The resource `R.color.purple_700` appears to be unused"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/src/main/res/values/colors.xml"
+                                },
+                                "region": {
+                                    "startLine": 5,
+                                    "startColumn": 10,
+                                    "endLine": 5,
+                                    "endColumn": 27,
+                                    "charOffset": 150,
+                                    "charLength": 17,
+                                    "snippet": {
+                                        "text": "name=\"purple_700\""
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 3,
+                                    "endLine": 8,
+                                    "snippet": {
+                                        "text": "  <color name=\"purple_200\">#FFBB86FC</color>\n  <color name=\"purple_500\">#FF6200EE</color>\n  <color name=\"purple_700\">#FF3700B3</color>\n  <color name=\"teal_200\">#FF03DAC5</color>"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "fixes": [
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "852e21f4bee13a6d"
+                    }
+                },
+                {
+                    "ruleId": "UnusedResources",
+                    "ruleIndex": 3,
+                    "message": {
+                        "text": "The resource R.color.teal_200 appears to be unused",
+                        "markdown": "The resource `R.color.teal_200` appears to be unused"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/src/main/res/values/colors.xml"
+                                },
+                                "region": {
+                                    "startLine": 6,
+                                    "startColumn": 10,
+                                    "endLine": 6,
+                                    "endColumn": 25,
+                                    "charOffset": 195,
+                                    "charLength": 15,
+                                    "snippet": {
+                                        "text": "name=\"teal_200\""
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 4,
+                                    "endLine": 9,
+                                    "snippet": {
+                                        "text": "  <color name=\"purple_500\">#FF6200EE</color>\n  <color name=\"purple_700\">#FF3700B3</color>\n  <color name=\"teal_200\">#FF03DAC5</color>\n  <color name=\"teal_700\">#FF018786</color>"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "fixes": [
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "e85075a3d0379b27"
+                    }
+                },
+                {
+                    "ruleId": "UnusedResources",
+                    "ruleIndex": 3,
+                    "message": {
+                        "text": "The resource R.color.teal_700 appears to be unused",
+                        "markdown": "The resource `R.color.teal_700` appears to be unused"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/src/main/res/values/colors.xml"
+                                },
+                                "region": {
+                                    "startLine": 7,
+                                    "startColumn": 10,
+                                    "endLine": 7,
+                                    "endColumn": 25,
+                                    "charOffset": 238,
+                                    "charLength": 15,
+                                    "snippet": {
+                                        "text": "name=\"teal_700\""
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 5,
+                                    "endLine": 10,
+                                    "snippet": {
+                                        "text": "  <color name=\"purple_700\">#FF3700B3</color>\n  <color name=\"teal_200\">#FF03DAC5</color>\n  <color name=\"teal_700\">#FF018786</color>\n  <color name=\"black\">#FF000000</color>"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "fixes": [
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "72a9c6e6c62d9b50"
+                    }
+                },
+                {
+                    "ruleId": "UnusedResources",
+                    "ruleIndex": 3,
+                    "message": {
+                        "text": "The resource R.color.black appears to be unused",
+                        "markdown": "The resource `R.color.black` appears to be unused"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/src/main/res/values/colors.xml"
+                                },
+                                "region": {
+                                    "startLine": 8,
+                                    "startColumn": 10,
+                                    "endLine": 8,
+                                    "endColumn": 22,
+                                    "charOffset": 281,
+                                    "charLength": 12,
+                                    "snippet": {
+                                        "text": "name=\"black\""
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 6,
+                                    "endLine": 11,
+                                    "snippet": {
+                                        "text": "  <color name=\"teal_200\">#FF03DAC5</color>\n  <color name=\"teal_700\">#FF018786</color>\n  <color name=\"black\">#FF000000</color>\n  <color name=\"white\">#FFFFFFFF</color>"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "fixes": [
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "8fabf23c20f79506"
+                    }
+                },
+                {
+                    "ruleId": "UnusedResources",
+                    "ruleIndex": 3,
+                    "message": {
+                        "text": "The resource R.color.white appears to be unused",
+                        "markdown": "The resource `R.color.white` appears to be unused"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/src/main/res/values/colors.xml"
+                                },
+                                "region": {
+                                    "startLine": 9,
+                                    "startColumn": 10,
+                                    "endLine": 9,
+                                    "endColumn": 22,
+                                    "charOffset": 321,
+                                    "charLength": 12,
+                                    "snippet": {
+                                        "text": "name=\"white\""
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 7,
+                                    "endLine": 12,
+                                    "snippet": {
+                                        "text": "  <color name=\"teal_700\">#FF018786</color>\n  <color name=\"black\">#FF000000</color>\n  <color name=\"white\">#FFFFFFFF</color>\n</resources>"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "fixes": [
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "07c4564bf0a372f4"
+                    }
+                },
+                {
+                    "ruleId": "FlagfitDeadlineExpired",
+                    "ruleIndex": 0,
+                    "message": {
+                        "text": "The @FlagType.WorkInProgress created by owner: hogehoge has expired!\nPlease consider deleting @FlagType.WorkInProgress as the expiration date has passed on 2022-12-30.\nThe flag of key: \"new-awesome-wip-feature\" is used in the awesomeWipFeatureEnabled function.\n",
+                        "markdown": "The @FlagType.WorkInProgress created by `owner: hogehoge` has expired!\nPlease consider deleting @FlagType.WorkInProgress as the expiration date has passed on 2022-12-30.\nThe flag of `key: \"new-awesome-wip-feature\"` is used in the awesomeWipFeatureEnabled function.\n"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/src/main/java/tv/abema/fragfit/SampleFlagService.kt"
+                                },
+                                "region": {
+                                    "startLine": 17,
+                                    "startColumn": 3,
+                                    "endLine": 20,
+                                    "endColumn": 4,
+                                    "charOffset": 491,
+                                    "charLength": 83,
+                                    "snippet": {
+                                        "text": "@FlagType.WorkInProgress(\n    owner = \"hogehoge\",\n    expiryDate = \"2022-12-30\"\n  )"
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 15,
+                                    "endLine": 23,
+                                    "snippet": {
+                                        "text": "    defaultValue = false\n  )\n  @FlagType.WorkInProgress(\n    owner = \"hogehoge\",\n    expiryDate = \"2022-12-30\"\n  )\n  fun awesomeWipFeatureEnabled(): Boolean"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "0bd74600c47a6401"
+                    }
+                },
+                {
+                    "ruleId": "FlagfitDeadlineExpired",
+                    "ruleIndex": 0,
+                    "message": {
+                        "text": "The @FlagType.Permission created by owner: Hoge Fuga has expired!\nPlease consider deleting @FlagType.Permission as the expiration date has passed on 2022-12-30.\nThe flag of key: \"new-awesome-permission-feature\" is used in the awesomePermissionFeatureEnabled function.\n",
+                        "markdown": "The @FlagType.Permission created by `owner: Hoge Fuga` has expired!\nPlease consider deleting @FlagType.Permission as the expiration date has passed on 2022-12-30.\nThe flag of `key: \"new-awesome-permission-feature\"` is used in the awesomePermissionFeatureEnabled function.\n"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uriBaseId": "%SRCROOT%",
+                                    "uri": "sample-android/src/main/java/tv/abema/fragfit/SampleFlagService.kt"
+                                },
+                                "region": {
+                                    "startLine": 46,
+                                    "startColumn": 3,
+                                    "endLine": 49,
+                                    "endColumn": 4,
+                                    "charOffset": 1102,
+                                    "charLength": 80,
+                                    "snippet": {
+                                        "text": "@FlagType.Permission(\n    owner = \"Hoge Fuga\",\n    expiryDate = \"2022-12-30\"\n  )"
+                                    }
+                                },
+                                "contextRegion": {
+                                    "startLine": 44,
+                                    "endLine": 52,
+                                    "snippet": {
+                                        "text": "    defaultValue = false\n  )\n  @FlagType.Permission(\n    owner = \"Hoge Fuga\",\n    expiryDate = \"2022-12-30\"\n  )\n  fun awesomePermissionFeatureEnabled(): Boolean"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "partialFingerprints": {
+                        "sourceContext/v1": "f52b7b2148145087"
+                    }
+                }
+            ]
+        }
+    ]
+}

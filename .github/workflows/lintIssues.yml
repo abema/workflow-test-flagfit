@@ -17,8 +17,8 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: lint
-        run: ./gradlew :sample-android:lintDebug
+#      - name: lint
+#        run: ./gradlew :sample-android:lintDebug
 
       - name: Create issues from SARIF files
         env:

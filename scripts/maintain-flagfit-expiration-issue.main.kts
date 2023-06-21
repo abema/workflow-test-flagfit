@@ -8,25 +8,29 @@ import org.kohsuke.github.GitHub
 import java.io.File
 import java.util.regex.Pattern
 
-class FlagExpirationIssueMaintainer {
+class FlagExpirationIssueMaintainer(
+  private val githubToken: String,
+  private val repoName: String,
+  private val headSha: String
+) {
 
-  fun maintain() {
-    val githubToken = System.getenv("GITHUB_TOKEN")
-    val repoName = System.getenv("GITHUB_REPOSITORY")
-    val headSha = System.getenv("HEAD_SHA")
+  fun maintain(
+    locationSarif: String,
+    labelName: String = "",
+    assignerAlternative: String
+  ) {
     val gitHub = GitHub.connectUsingOAuth(githubToken)
     val repo = gitHub.getRepository(repoName)
     val targetRuleIdList = listOf(FLAGFIT_DEADLINE_SOON, FLAGFIT_DEADLINE_EXPIRED)
-    val file = File("./lint-results.sarif")
+    val file = File(locationSarif)
     val content = file.readText()
     val jsonData = JSONObject(content)
     val runs = jsonData
       .getJSONArray("runs")
     val results = runs.getJSONObject(0).getJSONArray("results")
-    val label = "featureflag-expiration"
     val limitIssue = 50
     val existingIssues = repo.queryIssues()
-      .label(label)
+      .label(labelName)
       .state(GHIssueState.OPEN)
       .pageSize(limitIssue)
       .list()
@@ -34,7 +38,7 @@ class FlagExpirationIssueMaintainer {
       .toMutableList()
     if (existingIssues.size >= limitIssue) {
       throw IllegalStateException(
-        "Found more than $limitIssue Issues with $label set, " +
+        "Found more than $limitIssue Issues with $labelName set, " +
           "please make sure it is less than ${limitIssue}!"
       )
     }
@@ -80,14 +84,13 @@ class FlagExpirationIssueMaintainer {
         }
 
         val collaborator = repo.collaboratorNames
-        val assignee = if (owner in collaborator) owner else "momomomo111"
-        println(collaborator.toString())
+        val assignee = if (owner in collaborator) owner else assignerAlternative
 
         if (existingIssue == null) {
           val issue = repo.createIssue(issueTitle)
             .body(warningMessage)
             .assignee(assignee)
-            .label(label)
+            .label(labelName)
             .create()
           issue.comment(artifactUri)
           existingIssues.add(issue)
@@ -122,4 +125,12 @@ class FlagExpirationIssueMaintainer {
   }
 }
 
-FlagExpirationIssueMaintainer().maintain()
+FlagExpirationIssueMaintainer(
+  githubToken = System.getenv("GITHUB_TOKEN"),
+  repoName = System.getenv("GITHUB_REPOSITORY"),
+  headSha = System.getenv("HEAD_SHA")
+).maintain(
+  locationSarif = "./lint-results.sarif",
+  labelName = "",
+  assignerAlternative = "momomomo111"
+)
