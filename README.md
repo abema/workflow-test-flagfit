@@ -80,6 +80,10 @@ class RemoteFlagSource(
 }
 ```
 
+In this example, `RemoteFlagSource` is a class that communicates with a server to fetch the feature flag. `remoteFlags` is a hypothetical API service that your application uses to communicate with the backend.
+
+Please replace `remoteFlags` and `remoteFlags.get(key, defaultValue)` with your actual implementation to communicate with the server or SDK like Firebase Remote Config.
+
 ### Fetching Feature Flags
 
 ```kotlin
@@ -88,10 +92,6 @@ val flagfit = Flagfit(
   annotationAdapters = FlagType.annotationAdapters()
 )
 ```
-
-In this example, `RemoteFlagSource` is a class that communicates with a server to fetch the feature flag. `remoteFlags` is a hypothetical API service that your application uses to communicate with the backend.
-
-Please replace `remoteFlags` and `remoteFlags.get(key, defaultValue)` with your actual implementation to communicate with the server or SDK like Firebase Remote Config.
 
 Flagfit generates an implementation of the `FlagService` interface which can then be invoked:
 
@@ -474,4 +474,4 @@ Flags that have passed their expiration date will be automatically created as is
 - Please copy the [workflow](./.github/workflows/lintIssues.yml) and [script](./scripts/maintain-flagfit-expiration-issue.main.kts) to the project you are using.
 - The workflow allows you to set a cron schedule, so please set it as appropriate.
 - When setting feature flags with Flagfit, you will likely use `@BooleanFlag` or `@VariationFlag`, but please make sure that the key value is always unique.
-<img width="1250" alt="Sample issues" src="https://github.com/abema/flagfit/assets/51113946/b2a1906d-2493-49c0-a0cd-4fa8fd0d132d">
+<img width="1253" alt="Sample issues" src="https://github.com/abema/flagfit/assets/51113946/e4e5715d-f77a-4ffc-abbd-429544c1c1fa">
