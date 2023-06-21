@@ -48,7 +48,7 @@ class FlagExpirationIssueMaintainer {
         val keyPatternRegex = "`key: (.*?)`"
         val ownerPatternRegex = "`owner: (.*?)`"
         val key = matchText(text = message, patternRegex = keyPatternRegex)
-        val assignee = matchText(text = message, patternRegex = ownerPatternRegex)
+        val owner = matchText(text = message, patternRegex = ownerPatternRegex)
 
         val issueTitle = "Expiration status of the $key flag"
         val warningMessage = """
@@ -60,7 +60,7 @@ class FlagExpirationIssueMaintainer {
           |
           |`ruleId: $ruleId`
           |`key: $key`
-          |`owner: $assignee`
+          |`owner: $owner`
           |-->
         """.trimMargin()
         val locations = result.getJSONArray("locations").getJSONObject(0)
@@ -78,6 +78,10 @@ class FlagExpirationIssueMaintainer {
           val body = issue.body
           key == matchText(text = body, patternRegex = keyPatternRegex)
         }
+
+        val collaborator = repo.collaboratorNames
+        val assignee = if (owner in collaborator) owner else "momomomo111"
+
 
         if (existingIssue == null) {
           val issue = repo.createIssue(issueTitle)
