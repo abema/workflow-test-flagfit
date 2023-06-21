@@ -81,7 +81,7 @@ class FlagExpirationIssueMaintainer {
 
         val collaborator = repo.collaboratorNames
         val assignee = if (owner in collaborator) owner else "momomomo111"
-
+        println(collaborator.toString())
 
         if (existingIssue == null) {
           val issue = repo.createIssue(issueTitle)
