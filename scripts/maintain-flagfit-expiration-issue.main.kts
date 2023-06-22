@@ -11,13 +11,13 @@ import java.util.regex.Pattern
 class FlagExpirationIssueMaintainer(
   private val githubToken: String,
   private val repoName: String,
-  private val headSha: String
+  private val headSha: String,
 ) {
 
   fun maintain(
     locationSarif: String,
     labelName: String = "",
-    assignerAlternative: String
+    assignerAlternative: String,
   ) {
     val gitHub = GitHub.connectUsingOAuth(githubToken)
     val repo = gitHub.getRepository(repoName)
@@ -29,18 +29,24 @@ class FlagExpirationIssueMaintainer(
       .getJSONArray("runs")
     val results = runs.getJSONObject(0).getJSONArray("results")
     val limitIssue = 50
-    val existingIssues = repo.queryIssues()
-      .label(labelName)
-      .state(GHIssueState.OPEN)
-      .pageSize(limitIssue)
-      .list()
-      .take(limitIssue)
-      .toMutableList()
+    val existingIssues =
+      repo.queryIssues()
+        .apply { if (labelName.isNotEmpty()) label(labelName) }
+        .state(GHIssueState.OPEN)
+        .pageSize(limitIssue)
+        .list()
+        .take(limitIssue)
+        .toMutableList()
+
     if (existingIssues.size >= limitIssue) {
-      throw IllegalStateException(
+      val messageLimitIssue = if (labelName.isNotEmpty()) {
         "Found more than $limitIssue Issues with $labelName set, " +
           "please make sure it is less than ${limitIssue}!"
-      )
+      } else {
+        "Found more than $limitIssue Issues set, " +
+          "please make sure it is less than ${limitIssue}!"
+      }
+      throw IllegalStateException(messageLimitIssue)
     }
 
     for (i in 0 until results.length()) {
@@ -90,7 +96,7 @@ class FlagExpirationIssueMaintainer(
           val issue = repo.createIssue(issueTitle)
             .body(warningMessage)
             .assignee(assignee)
-            .label(labelName)
+            .apply { if (labelName.isNotEmpty()) label(labelName) }
             .create()
           issue.comment(artifactUri)
           existingIssues.add(issue)
