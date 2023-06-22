@@ -138,5 +138,5 @@ FlagExpirationIssueMaintainer(
 ).maintain(
   locationSarif = "./lint-results.sarif",
   labelName = "",
-  assignerAlternative = "momomomo111"
+  assignerAlternative = "{Alternative assignor's GitHub UserId}"
 )
